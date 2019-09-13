@@ -1,6 +1,8 @@
 #include <stdio.h>
 int fatorial(int n);
 
+//comentário qualquer para testar
+
 int main(int argc, char *argv[])
 {
 	int numero = atoi(argv[1]);
