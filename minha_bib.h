@@ -125,13 +125,36 @@ void apaga(void)
 
 
 	char generico[MAX];
-	int posicao;
+	int posicao, escolha = 0;
 
+	printf("\tDigite o nome a ser apagado: ");
+	ler_string(generico, 100);
+	printf("\n");
+
+	if(buscar(generico) != -1){
+		posicao = buscar(generico);
+		printf("\tDeseja realmente apagar o registro de %s?\n", info[posicao].nome);
+		printf("\t1. Apagar.\n");
+		printf("\t2. Sair.\n");
+		while(escolha != 1 && escolha != 2){
+			printf("-- Digite sua escolha: ");
+			scanf("%d", &escolha);
+			if (escolha != 1 && escolha != 2) {
+				printf("\tEscolha uma opcao valida!\n");
+			}
+		}
+		if(escolha == 1)
+			info[posicao].nome[0] = '\0';
+	}else
+		printf("\tNome nao encontrado!\n");
+
+/*
 	printf("numero do Registro: ");
 	scanf("%d", &posicao);
 
 	if (posicao >= 0 && posicao < MAX)
 		info[posicao].nome[0] = '\0';
+*/
 }
 
 void imprime(void)
@@ -141,15 +164,47 @@ void imprime(void)
 	// ou um registro específico, caso ele deseje um registro específico permitir a busca do registro pelo nome
 	// usar a função de busca implementada anteriormente para retornar a posição e imprimir ela
 
-	int i;
+	int i, escolha = 0, posicao;
+	char generico[MAX];
 
-	for (i = 0; i < MAX; i++)
-		if (info[i].nome[0] != '\0') {
-			printf("-- Registro %d:\n", i);
-			printf("\t Nome: %s", info[i].nome);
-			printf("\t Rua: %s", info[i].rua);
-			printf("\t Cidade: %s", info[i].cidade);
-			printf("\t Estado: %s\n", info[i].estado);
-			printf("\t CEP: %lu\n", info[i].cep);
+	printf("\tO que deseja imprimir?\n");
+	printf("\t1. Registro especifico\n");
+	printf("\t2. Todos os registros\n");
+	printf("\t3. Sair\n");
+
+	while(escolha < 1 && escolha < 3){
+		printf("-- Digite sua escolha: ");
+		scanf("%d", &escolha);
+		if (escolha < 1 && escolha < 3) {
+			printf("\tEscolha uma opcao valida!\n");
 		}
+	}
+	if(escolha == 1){
+		printf("-- Digite o nome a ser impresso: ");
+		fgets(generico, 100, stdin);
+
+		if(buscar(generico) != -1){
+
+			posicao = buscar(generico);
+			printf("-- Registro %d:\n", posicao);
+			printf("\t Nome: %s", info[posicao].nome);
+			printf("\t Rua: %s", info[posicao].rua);
+			printf("\t Cidade: %s", info[posicao].cidade);
+			printf("\t Estado: %s\n", info[posicao].estado);
+			printf("\t CEP: %lu\n", info[posicao].cep);
+
+		}else
+			printf("\tNome nao encontrado!\n");
+	}
+
+	if(escolha == 2)
+		for (i = 0; i < MAX; i++)
+			if (info[i].nome[0] != '\0') {
+				printf("-- Registro %d:\n", i);
+				printf("\t Nome: %s", info[i].nome);
+				printf("\t Rua: %s", info[i].rua);
+				printf("\t Cidade: %s", info[i].cidade);
+				printf("\t Estado: %s\n", info[i].estado);
+				printf("\t CEP: %lu\n", info[i].cep);
+			}
 }
