@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define MAX 100
 #include "minha_bib.h"
 
 
 // (1 pt) altere a organização do programa de maneira a deixar apenas a função principal (main()) no arquivo ex1.c
-// e a estrutura e funções utilizadas em uma bibilioteca chamada minha_bib.h 
+// e a estrutura e funções utilizadas em uma bibilioteca chamada minha_bib.h
 
 int main()
 {
@@ -28,6 +29,8 @@ int main()
 			exit(0);
 			break;
 		}
+		//system("clear");
+		//system("cls");
 	}
 	return 0;
 }
