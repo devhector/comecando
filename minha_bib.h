@@ -1,5 +1,5 @@
-
-
+#include <stdio.h>
+#include <string.h>
 
 struct end {
 	char nome[100];
@@ -53,16 +53,35 @@ void ler_string(char palavra[100], int tamanho)
 
 }
 
+int livre(void)
+{
+	int i;
+	for (i = 0; info[i].nome[0] && i < MAX; i++) ;
+	if (i == MAX)
+		return -1;
+	return i;
+}
+
+int buscar(char busca_nome[]){
+	int i;
+	for (i = 0; i < MAX; i++){
+		if(strcmp(info[i].nome, busca_nome) == 0)
+			return i;
+	}
+	return -1;
+}
+
 void insere(void)
 {
-	
-	// (3.0 pts) Altere essa função para inicialmente ler o nome a ser inserido 
-	// e verificar se ele já existe antes de inserir 
+
+	// (3.0 pts) Altere essa função para inicialmente ler o nome a ser inserido
+	// e verificar se ele já existe antes de inserir
 	// (use a função de busca que vc deve implementar na próxima questão).
-	// Se ele já existe, mostrar uma mensagem dizendo que aquele registro já existe 
+	// Se ele já existe, mostrar uma mensagem dizendo que aquele registro já existe
 	// e enserar a execução da função
-	
+
 	int posicao;
+	char generico[MAX];
 
 	posicao = livre();
 	if (posicao == -1) {
@@ -70,9 +89,19 @@ void insere(void)
 		return;
 	}
 
+
+
 	printf("-- Registro %d:\n", posicao);
 	printf("\t Nome: ");
-	ler_string(info[posicao].nome, 100);
+	ler_string(generico, 100);
+
+	if(buscar(generico) != -1){
+		printf("\t Esse nome ja existe!\n");
+		return;
+	}else{
+		strcpy(info[posicao].nome, generico);
+	}
+
 	printf("\t Rua: ");
 	ler_string(info[posicao].rua, 100);
 	printf("\t Cidade: ");
@@ -83,23 +112,19 @@ void insere(void)
 	scanf("%lu", &info[posicao].cep);
 }
 
-int livre(void)
-{
-	int i;
-	for (i = 0; info[i].nome[0] && i < MAX; i++) ;
-	if (i == MAX)
-		return -1;
-	return i;
-}
+
+
 
 void apaga(void)
 {
-	
-	
+
+
 	// (3.0 pts) alterar essa função para realizar a busca do resgistro a ser apagado pelo campo nome
 	// implementar uma função que retorna a posição do resgistro com aquele nome, caso encontrado,
 	// e perguntar ao usuário se ele realmente deseja apagar aquele registro
-	
+
+
+	char generico[MAX];
 	int posicao;
 
 	printf("numero do Registro: ");
@@ -111,11 +136,11 @@ void apaga(void)
 
 void imprime(void)
 {
-	
-	// (3.0 pts) altere essa função para perguntar ao usuário se ele quer imprimir todos os registros 
+
+	// (3.0 pts) altere essa função para perguntar ao usuário se ele quer imprimir todos os registros
 	// ou um registro específico, caso ele deseje um registro específico permitir a busca do registro pelo nome
 	// usar a função de busca implementada anteriormente para retornar a posição e imprimir ela
-	
+
 	int i;
 
 	for (i = 0; i < MAX; i++)
