@@ -18,6 +18,9 @@ void cria_lista(void)
 
 int menu(void)
 {
+	//system("clear"); //linux
+	//system("cls"); //windows
+
 	int c = 0;
 	do {
 		printf("-- MENU:\n");
@@ -73,6 +76,8 @@ int buscar(char busca_nome[]){
 
 void insere(void)
 {
+	system("clear"); //linux
+	//system("cls"); //windows
 
 	// (3.0 pts) Altere essa função para inicialmente ler o nome a ser inserido
 	// e verificar se ele já existe antes de inserir
@@ -117,7 +122,8 @@ void insere(void)
 
 void apaga(void)
 {
-
+	system("clear"); //linux
+	//system("cls"); //windows
 
 	// (3.0 pts) alterar essa função para realizar a busca do resgistro a ser apagado pelo campo nome
 	// implementar uma função que retorna a posição do resgistro com aquele nome, caso encontrado,
@@ -159,6 +165,8 @@ void apaga(void)
 
 void imprime(void)
 {
+	system("clear"); //linux
+	//system("cls"); //windows
 
 	// (3.0 pts) altere essa função para perguntar ao usuário se ele quer imprimir todos os registros
 	// ou um registro específico, caso ele deseje um registro específico permitir a busca do registro pelo nome
@@ -181,7 +189,7 @@ void imprime(void)
 	}
 	if(escolha == 1){
 		printf("-- Digite o nome a ser impresso: ");
-		fgets(generico, 100, stdin);
+		scanf("%s",generico);
 
 		if(buscar(generico) != -1){
 
